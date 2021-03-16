@@ -1,3 +1,5 @@
+import java.nio.file.Path;
+
 public class Grid {
 
     private boolean[][] grid;
@@ -61,6 +63,14 @@ public class Grid {
 
     public boolean isEndPos(int row, int col){
         return row == end.getRow() && col == end.getCol();
+    }
+
+    public Position getStart(){
+        return start;
+    }
+
+    public Position getEnd(){
+        return end;
     }
 
     private void fillPosGrid(){
