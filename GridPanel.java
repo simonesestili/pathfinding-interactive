@@ -23,9 +23,7 @@ public class GridPanel extends JPanel {
     private Image startImage;
     private Image endImage;
 
-    private boolean isPathVisible = true;
-    private boolean isExploredVisible = true;
-    private boolean isShowing;
+    private Integer pathStatus = 0;
 
     public GridPanel(Grid grid){
         this.grid = grid;
@@ -46,8 +44,13 @@ public class GridPanel extends JPanel {
         drawLines();
     }
 
+    public void togglePath(){
+        pathStatus++;
+        pathStatus &= 3;
+    }
+
     public void shadePath(){
-        if(!isPathVisible) return;
+        if(pathStatus == 0) return;
 
         g2.setColor(pathCol);
 
@@ -56,7 +59,7 @@ public class GridPanel extends JPanel {
     }
 
     public void shadeExplored(){
-        if(!isExploredVisible) return;
+        if(pathStatus != 2) return;
 
         g2.setColor(exploredCol);
 
