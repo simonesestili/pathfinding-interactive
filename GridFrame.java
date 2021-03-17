@@ -6,8 +6,8 @@ public class GridFrame extends JFrame {
 
     private GridPanel panel;
 
-    private static final int X_CURSOR_OFFSET = 8;
-    private static final int Y_CURSOR_OFFSET = 32;
+    private static final int X_CURSOR_OFFSET = 5;
+    private static final int Y_CURSOR_OFFSET = 22;
 
     Action reset;
     Action path;

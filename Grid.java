@@ -26,13 +26,13 @@ public class Grid {
     }
 
     public void setStart(int row, int col){
-        if(!isOnGrid(row, col) || isEndPos(row, col))
+        if(!isOnGrid(row, col) || isEndPos(row, col) || getCell(row, col))
             return;
         start = new Position(row, col);
     }
 
     public void setEnd(int row, int col){
-        if(!isOnGrid(row, col) || isStartPos(row, col))
+        if(!isOnGrid(row, col) || isStartPos(row, col) || getCell(row, col))
             return;
         end = new Position(row, col);
     }
