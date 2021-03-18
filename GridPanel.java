@@ -24,6 +24,7 @@ public class GridPanel extends JPanel {
     private Image endImage;
 
     private Integer pathStatus = 0;
+    private Algorithm alogrithm = Algorithm.DFS;
 
     public GridPanel(Grid grid){
         this.grid = grid;
@@ -54,7 +55,15 @@ public class GridPanel extends JPanel {
 
         g2.setColor(pathCol);
 
-        for(Node node : Pathfinder.aStar(grid).getPath())
+        Path path;
+        switch(alogrithm){
+            case BFS: path = Pathfinder.bfs(grid); break;
+            case DFS: path = Pathfinder.dfs(grid); break;
+            //case DIJKSTRA: path = Pathfinder.dijkstra(grid); break;
+            default: path = Pathfinder.aStar(grid);
+        }
+
+        for(Node node : path.getPath())
             g2.fillRect(side * node.getPos().getCol(), side * node.getPos().getRow(), side, side);
     }
 
@@ -63,7 +72,15 @@ public class GridPanel extends JPanel {
 
         g2.setColor(exploredCol);
 
-        for(Node node : Pathfinder.aStar(grid).getExplored())
+        Path path;
+        switch(alogrithm){
+            case BFS: path = Pathfinder.bfs(grid); break;
+            case DFS: path = Pathfinder.dfs(grid); break;
+            //case DIJKSTRA: path = Pathfinder.aStar(grid); break;
+            default: path = Pathfinder.aStar(grid);
+        }
+
+        for(Node node : path.getExplored())
             g2.fillRect(side * node.getPos().getCol(), side * node.getPos().getRow(), side, side);
     }
 
@@ -86,6 +103,10 @@ public class GridPanel extends JPanel {
         shadePath();
         shadeExplored();
         drawStartEnd();
+    }
+
+    public void setAlogrithmTo(Algorithm algorithm){
+        this.alogrithm = algorithm;
     }
 
     public Grid getGrid(){

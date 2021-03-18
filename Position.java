@@ -40,6 +40,11 @@ public class Position {
         return new Position(row + 1, col - 1);
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        Position other = (Position) obj;
+        return row == other.row && col == other.col;
+    }
 
     public int getRow(){
         return row;
@@ -47,5 +52,10 @@ public class Position {
 
     public int getCol(){
         return col;
+    }
+
+    @Override
+    public String toString() {
+        return "(" + row + ", " + col + ")";
     }
 }

@@ -9,6 +9,7 @@ public class Node {
     private int heuristic;
     private int distFromStart;
     private int f;
+    private boolean isFound;
 
     public Node(int row, int col, Position end){
         this.pos = new Position(row, col);
@@ -42,6 +43,18 @@ public class Node {
         return parent;
     }
 
+    public Position getEnd() {
+        return end;
+    }
+
+    public boolean isFound() {
+        return isFound;
+    }
+
+    public void setFound() {
+        isFound = true;
+    }
+
     public int getDistFromStart() {
         return distFromStart;
     }
@@ -55,8 +68,20 @@ public class Node {
     }
 
     private void calcHeuristic(){
-        heuristic = (int) (Math.sqrt(Math.pow(Math.abs(pos.getRow() - end.getRow()), 2) +
-                                    Math.pow(Math.abs(pos.getCol() - end.getCol()), 2)) * 10);
+        if(Pathfinder.canMoveDiagonal())
+            heuristic = (int) (Math.sqrt(Math.pow(Math.abs(pos.getRow() - end.getRow()), 2) +
+                    Math.pow(Math.abs(pos.getCol() - end.getCol()), 2)) * 10);
+        else
+            heuristic = Math.abs(pos.getRow() - end.getRow()) + Math.abs(pos.getCol() - end.getCol());
+
         updateF();
+    }
+
+
+    @Override
+    public String toString() {
+        return "Node{" +
+                "parent=" + parent +
+                '}';
     }
 }

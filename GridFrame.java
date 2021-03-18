@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
-public class GridFrame extends JFrame {
+public class GridFrame extends JFrame{
 
     private GridPanel panel;
 
@@ -13,6 +13,12 @@ public class GridFrame extends JFrame {
     Action path;
     Action start;
     Action end;
+
+    Action aStar;
+    Action bfs;
+    Action dfs;
+    Action dijkstra;
+    Action diagonal;
 
     public GridFrame(GridPanel panel){
         this.setTitle("Pathfinder");
@@ -30,6 +36,13 @@ public class GridFrame extends JFrame {
         start = new StartAction();
         end = new EndAction();
 
+        aStar = new AStarAction();
+        bfs = new BFSAction();
+        dfs = new DFSAction();
+        dijkstra = new DijkstraAction();
+        diagonal = new DiagonalAction();
+
+
         panel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("R"), "reset");
         panel.getActionMap().put("reset", reset);
         panel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("P"), "path");
@@ -38,6 +51,17 @@ public class GridFrame extends JFrame {
         panel.getActionMap().put("start", start);
         panel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("E"), "end");
         panel.getActionMap().put("end", end);
+
+        panel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("1"), "aStar");
+        panel.getActionMap().put("aStar", aStar);
+        panel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("2"), "bfs");
+        panel.getActionMap().put("bfs", bfs);
+        panel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("3"), "dfs");
+        panel.getActionMap().put("dfs", dfs);
+        panel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("4"), "dijkstra");
+        panel.getActionMap().put("dijkstra", dijkstra);
+        panel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("D"), "diagonal");
+        panel.getActionMap().put("diagonal", diagonal);
 
         this.add(panel);
         this.setResizable(false);
@@ -81,6 +105,46 @@ public class GridFrame extends JFrame {
                 return;
 
             panel.getGrid().setEnd(convertToRow(point.y - Y_CURSOR_OFFSET), convertToCol(point.x - X_CURSOR_OFFSET));
+            repaint();
+        }
+    }
+
+    class AStarAction extends AbstractAction{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            panel.setAlogrithmTo(Algorithm.A_STAR);
+            repaint();
+        }
+    }
+
+    class BFSAction extends AbstractAction{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            panel.setAlogrithmTo(Algorithm.BFS);
+            repaint();
+        }
+    }
+
+    class DFSAction extends AbstractAction{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            panel.setAlogrithmTo(Algorithm.DFS);
+            repaint();
+        }
+    }
+
+    class DijkstraAction extends AbstractAction{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            panel.setAlogrithmTo(Algorithm.DIJKSTRA);
+            repaint();
+        }
+    }
+
+    class DiagonalAction extends AbstractAction{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Pathfinder.toggleCanMoveDiagonal();
             repaint();
         }
     }
