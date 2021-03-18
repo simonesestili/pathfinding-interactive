@@ -1,5 +1,3 @@
-import java.nio.file.Path;
-
 public class Grid {
 
     private boolean[][] grid;

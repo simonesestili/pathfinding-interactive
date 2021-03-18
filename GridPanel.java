@@ -24,7 +24,8 @@ public class GridPanel extends JPanel {
     private Image endImage;
 
     private Integer pathStatus = 0;
-    private Algorithm alogrithm = Algorithm.DFS;
+    private Algorithm alogrithm = Algorithm.A_STAR;
+    private Path path;
 
     public GridPanel(Grid grid){
         this.grid = grid;
@@ -43,6 +44,20 @@ public class GridPanel extends JPanel {
 
         update();
         drawLines();
+        updateTitle();
+    }
+
+    private void updateTitle(){
+        if(path != null)
+            frame.setTitle("Algorithm: " + toText(alogrithm) + "     Explored Nodes: " + (path.getExplored().size() + path.getPath().size()));
+    }
+
+    private String toText(Algorithm algorithm){
+        switch (algorithm){
+            case A_STAR: return "A*";
+            case BFS: return "BFS";
+            default: return "DFS";
+        }
     }
 
     public void togglePath(){
@@ -55,7 +70,6 @@ public class GridPanel extends JPanel {
 
         g2.setColor(pathCol);
 
-        Path path;
         switch(alogrithm){
             case BFS: path = Pathfinder.bfs(grid); break;
             case DFS: path = Pathfinder.dfs(grid); break;
@@ -72,7 +86,6 @@ public class GridPanel extends JPanel {
 
         g2.setColor(exploredCol);
 
-        Path path;
         switch(alogrithm){
             case BFS: path = Pathfinder.bfs(grid); break;
             case DFS: path = Pathfinder.dfs(grid); break;
