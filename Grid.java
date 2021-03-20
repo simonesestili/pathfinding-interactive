@@ -5,12 +5,12 @@ public class Grid {
     private Position start;
     private Position end;
 
-    public Grid(int row, int col){
-        grid = new boolean[row][col];
-        posGrid = new Position[row][col];
+    public Grid(int side){
+        grid = new boolean[side][side];
+        posGrid = new Position[side][side];
         fillPosGrid();
         start = new Position(0, 0);
-        end = new Position(row - 1, col - 1);
+        end = new Position(side - 1, side - 1);
     }
 
     public void toggleCell(int row, int col){

@@ -17,7 +17,7 @@ public class GridPanel extends JPanel {
     private static final Color emptyCol = new Color(16, 24, 32);
     private static final Color obstacleCol = new Color(242, 170, 76);
     private static final Color pathCol = new Color(199,0,57);
-    private static final Color exploredCol = new Color(111,196,233);
+    private static final Color exploredCol = new Color(119,158,203);
     private static final Color lineCol = Color.WHITE;
 
     private Image startImage;

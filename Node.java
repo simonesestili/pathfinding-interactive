@@ -72,7 +72,7 @@ public class Node {
             heuristic = (int) (Math.sqrt(Math.pow(Math.abs(pos.getRow() - end.getRow()), 2) +
                     Math.pow(Math.abs(pos.getCol() - end.getCol()), 2)) * 10);
         else
-            heuristic = Math.abs(pos.getRow() - end.getRow()) + Math.abs(pos.getCol() - end.getCol());
+            heuristic = (Math.abs(pos.getRow() - end.getRow()) * 10) + (Math.abs(pos.getCol() - end.getCol()) * 10);
 
         updateF();
     }
